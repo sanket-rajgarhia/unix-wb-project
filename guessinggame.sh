@@ -20,6 +20,7 @@ function setup
     clear
 }
 
+
 #The main game function.
 function guessing_game()
 {
