@@ -20,7 +20,25 @@ function setup
     clear
 }
 
-#Test
-setup
-ls -al | grep -E '^[-]' | sort -nk 8
-echo "Total Number of file " : $(ls -al | grep -E '^[-]' | wc -l)
+#The main game function.
+function guessing_game()
+{
+    #Call set up before starting the game.
+    setup
+
+    #The number of files in the game directory.
+    no_of_files=$(ls -al | grep -E '^[-]' | wc -l)
+
+    #Welcome
+    echo "*******************************************"
+    echo "Welcome to The Guessing Game - version 0.1."
+    echo "*******************************************"
+    echo "Guess the number of files in the current   "
+    echo "directory to win."
+    echo ""
+
+
+}
+
+#Start the game
+guessing_game
