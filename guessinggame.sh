@@ -25,10 +25,8 @@ function guessing_game()
 {
     #Call set up before starting the game.
     setup
-
     #The number of files in the game directory.
     no_of_files=$(ls -al | grep -E '^[-]' | wc -l)
-
     #Welcome
     echo "*******************************************"
     echo "Welcome to The Guessing Game - version 0.1."
@@ -37,7 +35,39 @@ function guessing_game()
     echo "directory to win."
     echo ""
 
+    #Prompt the user to guess the number of files - till the user wins.
+    guess=0
+    while [[ $guess -ne $no_of_files ]]
+    do
+        #Get the user's guess
+        echo -n "Enter your guess : "
+        read response
 
+        #Check if a valid number has been enterd.
+        if [[ ! $response =~ ^[-+]?[0-9]+$ ]]
+        then
+            echo "Please enter a number to play the game."
+            continue
+        fi
+
+        #Check if the user guessed the number of files correctly.
+        if [[ $response -eq $no_of_files ]]
+        then
+            #User has guessed correctly - display the victory message and
+            #exit the program with a success code.
+            echo "You have guessed correctly - you Win!"
+            exit 0
+        else
+            #User has either guessed too low or too high.
+            #Prompt to try again.
+            if [[ $response -lt $no_of_files ]]
+            then
+                echo "Your guess was too low. Try again."
+            else
+                echo "Your guess was too high. Try again."
+            fi
+        fi
+    done
 }
 
 #Start the game
